@@ -17,7 +17,11 @@ public class ServletListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Aztec-WS started!");
 
-        
+        System.out.println("Wordnet path system property: "+System.getProperty("wordnet.path"));
+        System.out.println("TF/IDF path system property: "+System.getProperty("tfidf.path"));
+        System.out.println("Entries path system property: "+System.getProperty("entries.path"));
+        System.out.println("Publications path system property: "+System.getProperty("publications.path"));
+        System.out.println("Representatives path system property: "+System.getProperty("representatives.path"));
         Timer timerIndice = new Timer();
         TimerTask taskUpdate = new UpdateDocuments();
         timerIndice.schedule(taskUpdate, 30000l, 60000l * 30); //starts after 30 seconds from deployment is repeater every 30 minutes
