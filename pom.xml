@@ -4,7 +4,7 @@
 
     <groupId>edu.ucla.cs.scai</groupId>
     <artifactId>aztect-text-analysis-ws</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <packaging>war</packaging>
 
     <name>aztect-text-analysis-ws</name>
@@ -29,7 +29,7 @@
         <dependency>
             <groupId>edu.ucla.cs.scai</groupId>
             <artifactId>aztect-text-analysis-tools</artifactId>        
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </dependency>
     </dependencies>
 

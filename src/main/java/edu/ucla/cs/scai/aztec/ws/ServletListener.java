@@ -22,6 +22,7 @@ public class ServletListener implements ServletContextListener {
         System.out.println("Entries path system property: "+System.getProperty("entries.path"));
         System.out.println("Publications path system property: "+System.getProperty("publications.path"));
         System.out.println("Representatives words path system property: "+System.getProperty("representativeWords.path"));
+        System.out.println("Publications path system property: "+System.getProperty("keywords.path"));
         Timer timerIndice = new Timer();
         TimerTask taskUpdate = new UpdateDocuments();
         timerIndice.schedule(taskUpdate, 30000l, 60000l * 30); //starts after 30 seconds from deployment is repeater every 30 minutes
