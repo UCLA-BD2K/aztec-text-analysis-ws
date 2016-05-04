@@ -51,7 +51,22 @@ public class SimilarityService extends JsonRpcService {
             Logger.getLogger(SimilarityService.class.getName()).log(Level.SEVERE, null, ex);
             throw new JsonRpcException(JsonRpcError.INTERNAL_ERROR, ex.getMessage(), "Internal error");
         }
-    }    
+    } 
+    
+    @JsonRpcMethod(paramNames = {"entryId", "k"}, description = "Returns the k most similar entries to a given entry.")
+    public ArrayList<AztecEntry> getSimilarEntriesWithOnlyKeywords(String entryId, Integer k) throws JsonRpcException {
+        try {
+            ArrayList<WeightedEntry> res1 = new SimilarityComputation().getMostSimilarEntriesWithOnlyKeywords(entryId, k);
+            ArrayList<AztecEntry> res = new ArrayList<AztecEntry>();
+            for (int i = 0; i < Math.min(res1.size(), k); i++) {
+                res.add(res1.get(i).entry);
+            }
+            return res;
+        } catch (Exception ex) {
+            Logger.getLogger(SimilarityService.class.getName()).log(Level.SEVERE, null, ex);
+            throw new JsonRpcException(JsonRpcError.INTERNAL_ERROR, ex.getMessage(), "Internal error");
+        }
+    }     
     
     @JsonRpcMethod(paramNames = {"entryId"}, description = "Returns the possible duplicates for a given entry.")
     public ArrayList<AztecEntry> getPossibleDuplicates(String entryId) throws JsonRpcException {
