@@ -38,6 +38,21 @@ public class SimilarityService extends JsonRpcService {
         }
     }
     
+    @JsonRpcMethod(paramNames = {"entryId", "k", "simWeight", "tagWeight"}, description = "Returns the k most similar entries to a given entry.")
+    public ArrayList<AztecEntry> getWeightedSimilarEntries(String entryId, Integer k, Double simWeight, Double tagWeight) throws JsonRpcException {
+        try {
+            ArrayList<WeightedEntry> res1 = new SimilarityComputation().getMostSimilarEntries(entryId, k, simWeight, tagWeight);
+            ArrayList<AztecEntry> res = new ArrayList<AztecEntry>();
+            for (int i = 0; i < Math.min(res1.size(), k); i++) {
+                res.add(res1.get(i).entry);
+            }
+            return res;
+        } catch (Exception ex) {
+            Logger.getLogger(SimilarityService.class.getName()).log(Level.SEVERE, null, ex);
+            throw new JsonRpcException(JsonRpcError.INTERNAL_ERROR, ex.getMessage(), "Internal error");
+        }
+    }
+
     @JsonRpcMethod(paramNames = {"entryId", "k"}, description = "Returns the k most similar entries to a given entry.")
     public ArrayList<AztecEntry> getSimilarEntriesWithSeparateTags(String entryId, Integer k) throws JsonRpcException {
         try {
@@ -67,6 +82,21 @@ public class SimilarityService extends JsonRpcService {
             throw new JsonRpcException(JsonRpcError.INTERNAL_ERROR, ex.getMessage(), "Internal error");
         }
     }     
+    
+    @JsonRpcMethod(paramNames = {"entryId", "k"}, description = "Returns the k most similar entries to a given entry.")
+    public ArrayList<AztecEntry> getSimilarEntriesWithOnlyKeywordsTFIDF(String entryId, Integer k) throws JsonRpcException {
+        try {
+            ArrayList<WeightedEntry> res1 = new SimilarityComputation().getMostSimilarEntriesWithOnlyKeywordsTFIDF(entryId, k);
+            ArrayList<AztecEntry> res = new ArrayList<AztecEntry>();
+            for (int i = 0; i < Math.min(res1.size(), k); i++) {
+                res.add(res1.get(i).entry);
+            }
+            return res;
+        } catch (Exception ex) {
+            Logger.getLogger(SimilarityService.class.getName()).log(Level.SEVERE, null, ex);
+            throw new JsonRpcException(JsonRpcError.INTERNAL_ERROR, ex.getMessage(), "Internal error");
+        }
+    }    
     
     @JsonRpcMethod(paramNames = {"entryId"}, description = "Returns the possible duplicates for a given entry.")
     public ArrayList<AztecEntry> getPossibleDuplicates(String entryId) throws JsonRpcException {
