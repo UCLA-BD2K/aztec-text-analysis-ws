@@ -24,6 +24,22 @@
         <url-pattern>/similarity</url-pattern>
     </servlet-mapping>      
     <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>it.zenitlab.jsonrpc.servlet.JsonRpcServlet</servlet-class>
+        <init-param>
+            <param-name>serviceClass</param-name>
+            <param-value>edu.ucla.cs.scai.aztec.ws.SearchService</param-value>
+        </init-param>
+        <init-param>
+            <param-name>serviceListKeyword</param-name>
+            <param-value>wsd</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/search</url-pattern>
+    </servlet-mapping>      
+    <servlet>
         <servlet-name>GrantServlet</servlet-name>
         <servlet-class>it.zenitlab.jsonrpc.servlet.JsonRpcServlet</servlet-class>
         <init-param>

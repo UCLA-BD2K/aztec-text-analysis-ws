@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * @author Giuseppe M. Mazzeo <mazzeo@cs.ucla.edu>
  */
 public class SimilarityService extends JsonRpcService {
-
+    
     @JsonRpcMethod(paramNames = {"entryId", "k"}, description = "Returns the k most similar entries to a given entry.")
     public ArrayList<AztecEntry> getSimilarEntries(String entryId, Integer k) throws JsonRpcException {
         try {
@@ -84,9 +84,9 @@ public class SimilarityService extends JsonRpcService {
     }     
     
     @JsonRpcMethod(paramNames = {"entryId", "k"}, description = "Returns the k most similar entries to a given entry.")
-    public ArrayList<AztecEntry> getSimilarEntriesWithOnlyKeywordsTFIDF(String entryId, Integer k) throws JsonRpcException {
+    public ArrayList<AztecEntry> getSimilarEntriesWithOnlyKeywordsTFIDF(String entryId, Integer k, Double threhold) throws JsonRpcException {
         try {
-            ArrayList<WeightedEntry> res1 = new SimilarityComputation().getMostSimilarEntriesWithOnlyKeywordsTFIDF(entryId, k);
+            ArrayList<WeightedEntry> res1 = new SimilarityComputation().getMostSimilarEntriesWithOnlyKeywordsTFIDF(entryId, k, threhold);
             ArrayList<AztecEntry> res = new ArrayList<AztecEntry>();
             for (int i = 0; i < Math.min(res1.size(), k); i++) {
                 res.add(res1.get(i).entry);
