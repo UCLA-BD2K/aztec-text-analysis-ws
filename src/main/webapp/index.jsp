@@ -8,7 +8,7 @@
         <title>Search demo</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
         <script type="text/javascript">
-            var service_search_url = "http://localhost:8080/aztec-ws/search";
+            var service_search_url = "http://yellowstone.cs.ucla.edu/aztecws/search";
 
             function search() {
                 var query = $("#query").val();
